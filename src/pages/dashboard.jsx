@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import ShopifyTable from '../components/shopifyTable';
-import { Button, Page, Card, Spinner, Stack, Heading } from '@shopify/polaris';
+import { Button, Page, Card, Spinner, Stack } from '@shopify/polaris';
 import axios from 'axios';
-import { Subject } from 'rxjs'
+import { Subject } from 'rxjs';
+import { serverUrl } from '../config';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Dashboard extends Component {
 
     getData = () => {
         console.log('-----24----Request sent----');
-        axios.get('https://bae5c53c.ngrok.io/user')
+        axios.get(serverUrl)
             .then((res) => {
                 this.fetchData.next(res.data.data);
                 console.log('----26---', res);

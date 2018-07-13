@@ -6,6 +6,7 @@ import { TextField, Page, Card, Spinner, Stack, Heading } from '@shopify/polaris
 import axios from 'axios';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { serverUrl } from '../config';
 
 class Search extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Search extends Component {
     }
 
     getData = () => {
-        axios.get('https://bae5c53c.ngrok.io/user')
+        axios.get(serverUrl)
             .then((res) => {
                 console.log('-------31------', res);
                 this.setState({ data: res.data.data, isError: false, loading: false, searchData: res.data.data })
@@ -62,6 +63,7 @@ class Search extends Component {
                         if (item[0].match(regex)) {
                             return item;
                         }
+                        return false;
                     });
                     dataSearch = dataSearch.filter(obj => obj);
                     console.log('-------65----', dataSearch);
