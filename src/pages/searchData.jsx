@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import ShopifyTable from '../components/shopifyTable';
@@ -52,23 +51,23 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.subscription = this.onSearch$.pipe(debounceTime(1000),
+        this.subscription = this.onSearch$.pipe(debounceTime(500),
             distinctUntilChanged())
             .subscribe(debounced => {
                 console.log('--------57----', this.state, debounced);
                 this.setState({ debounced })
-                if(debounced){
+                if (debounced) {
                     const regex = new RegExp(`\\w*${debounced}\\w*`, 'gi');
                     let dataSearch = this.state.data.length && this.state.data.map((item) => {
                         if (item[0].match(regex)) {
                             return item;
                         }
                     });
-                    dataSearch = dataSearch.filter(obj=>obj);
+                    dataSearch = dataSearch.filter(obj => obj);
                     console.log('-------65----', dataSearch);
                     this.setState({ searchData: dataSearch });
                 } else {
-                    this.setState({ searchData: this.state.data});
+                    this.setState({ searchData: this.state.data });
                 }
             },
                 err => {
@@ -83,14 +82,6 @@ class Search extends Component {
     render() {
         const columnContentTypes = ['text', 'numeric'];
         const headings = ['Name', 'Number'];
-        
-        // if (this.state.loading) {
-        //     return (
-        //         <Page title={"Please wait while we are fetching the data..."}>
-        //             <Spinner size="large" color="teal" />
-        //         </Page>
-        //     )
-        // }
 
         if (this.state.isError) {
             return (
@@ -102,10 +93,10 @@ class Search extends Component {
             <Page
                 title={"Shopify Table"}
             >
-            
-                
-                    {
-                        this.state.loading ?
+
+
+                {
+                    this.state.loading ?
                         <Card
                             title="Search Data"
                         >
@@ -123,9 +114,9 @@ class Search extends Component {
                                 <br />
                                 <center><Spinner size="large" color="teal" /></center>
                             </Card.Section>
- 
-                            </Card>
-                            :
+
+                        </Card>
+                        :
                         <Card
                             title="Search Data"
                         >
@@ -138,21 +129,21 @@ class Search extends Component {
                                     </Stack.Item>
                                 </Stack>
                             </Card.Section>
-                    <Card.Section>
-                        <TextField
-                            value={this.state.search}
-                            onChange={this.onSearch}
-                            placeholder={"Search"}
-                        />
-                    </Card.Section>
-                    <Card.Section>
-                        <ShopifyTable
-                            columnContentTypes={columnContentTypes}
-                            headings={headings}
-                            rows={this.state.searchData}
-                        />
-                    </Card.Section>
-                </Card>
+                            <Card.Section>
+                                <TextField
+                                    value={this.state.search}
+                                    onChange={this.onSearch}
+                                    placeholder={"Search"}
+                                />
+                            </Card.Section>
+                            <Card.Section>
+                                <ShopifyTable
+                                    columnContentTypes={columnContentTypes}
+                                    headings={headings}
+                                    rows={this.state.searchData}
+                                />
+                            </Card.Section>
+                        </Card>
                 }
             </Page>
         );

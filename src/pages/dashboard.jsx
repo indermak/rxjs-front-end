@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../logo.svg';
 import '../App.css';
 import { Link } from 'react-router-dom';
 import ShopifyTable from '../components/shopifyTable';
@@ -8,7 +7,7 @@ import axios from 'axios';
 import { Subject } from 'rxjs'
 
 class Dashboard extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             data: [],
@@ -25,7 +24,7 @@ class Dashboard extends Component {
                 err => this.setState({ isError: true, loading: false, err }),
                 () => this.setState({ isCompleted: true })
             )
-        this.interval = setInterval(()=>{
+        this.interval = setInterval(() => {
             this.getData();
         }, 5000);
     }
@@ -33,13 +32,13 @@ class Dashboard extends Component {
     getData = () => {
         console.log('-----24----Request sent----');
         axios.get('https://bae5c53c.ngrok.io/user')
-        .then((res)=>{
-            this.fetchData.next(res.data.data);
-            console.log('----26---', res);
-        })
-        .catch((err)=>{
-            this.setState({ err, isError: true, loading: false });
-        })
+            .then((res) => {
+                this.fetchData.next(res.data.data);
+                console.log('----26---', res);
+            })
+            .catch((err) => {
+                this.setState({ err, isError: true, loading: false });
+            })
     }
 
     componentWillUnmount() {
@@ -60,16 +59,9 @@ class Dashboard extends Component {
         const headings = ['Name', 'Number'];
 
         const title = this.state.isCompleted ? 'Subscription ended, Thank you!' : 'Please wait while we are fetching the data...'
-        // if (this.state.loading) {
-        //     return (
-        //             <Page title={"Please wait while we are fetching the data..."}>
-        //                 <Spinner size="large" color="teal" />
-        //             </Page>
-        //     )
-        // }
 
-        if(this.state.isError) {
-            return(
+        if (this.state.isError) {
+            return (
                 <Page title={"Sorry, Something went wrong..."} />
             )
         }
@@ -97,35 +89,35 @@ class Dashboard extends Component {
                             </Card.Section>
                         </Card>
                         :
-                <Card
-                    title={title}
-                >
-                <Card.Section>
-                        <Stack>
-                            <Stack.Item fill>
-                            </Stack.Item>
-                            <Stack.Item>
-                                <Link to="/search">Search Data</Link>
-                            </Stack.Item>
-                        </Stack>
-                </Card.Section>
-                <Card.Section>
-                        <Button 
-                            fullWidth 
-                            disabled={this.state.isDisabled}
-                            onClick={this.completeTask}
+                        <Card
+                            title={title}
                         >
-                            Unsubscribe
+                            <Card.Section>
+                                <Stack>
+                                    <Stack.Item fill>
+                                    </Stack.Item>
+                                    <Stack.Item>
+                                        <Link to="/search">Search Data</Link>
+                                    </Stack.Item>
+                                </Stack>
+                            </Card.Section>
+                            <Card.Section>
+                                <Button
+                                    fullWidth
+                                    disabled={this.state.isDisabled}
+                                    onClick={this.completeTask}
+                                >
+                                    Unsubscribe
                         </Button>
-                    </Card.Section>
-                <Card.Section>
-                    <ShopifyTable
-                        columnContentTypes={columnContentTypes}
-                        headings={headings}
-                        rows={this.state.data}
-                    />
-                    </Card.Section>
-                </Card>
+                            </Card.Section>
+                            <Card.Section>
+                                <ShopifyTable
+                                    columnContentTypes={columnContentTypes}
+                                    headings={headings}
+                                    rows={this.state.data}
+                                />
+                            </Card.Section>
+                        </Card>
                 }
             </Page>
         );
