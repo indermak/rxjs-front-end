@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { DataTable } from '@shopify/polaris';
+import { DataTable, Heading } from '@shopify/polaris';
 import styled from 'styled-components';
 
 export default class ShopifyTable extends Component{
     render() {
-        return(
-            <Wrapper>
-                <DataTable
-                    columnContentTypes={this.props.columnContentTypes}
-                    headings={this.props.headings}
-                    rows={this.props.rows}
-                    // totals={['', '', '', 255, '$155,830.00']}
-                />
-            </Wrapper>
-        )
+        if (this.props.rows && this.props.rows.length && (typeof this.props.rows === "object") ){
+            return(
+                <Wrapper>
+                    <DataTable
+                        columnContentTypes={this.props.columnContentTypes}
+                        headings={this.props.headings}
+                        rows={this.props.rows}
+                        // totals={['', '', '', 255, '$155,830.00']}
+                    />
+                </Wrapper>
+            )
+        } else {
+            return(<Heading> No Data</Heading>)
+        }
     }
 };
 

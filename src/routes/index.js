@@ -4,9 +4,9 @@ import { AppProvider } from '@shopify/polaris';
 import '@shopify/polaris/styles.css';
 
 //import Components
-import Dashboard from '../pages/dashboard';
-import Search from "../pages/searchData";
-import NoPageFound from '../pages/noPageFound';
+import Dashboard from '../pages/Dashboard';
+import Search from "../pages/SearchData";
+import NoPageFound from '../pages/NoPageFound';
 
 export default class Routes extends React.Component{
     render(){
