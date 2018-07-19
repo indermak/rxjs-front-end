@@ -9,7 +9,7 @@ const mapStateToProps = state => {
     const dashboard = getState(state, 'dashboard');
     return {
         searchData: dashboard.search,
-        loading: dashboard.loading,
+        isLoading: dashboard.isLoading,
         isError: dashboard.isError
     };
 };

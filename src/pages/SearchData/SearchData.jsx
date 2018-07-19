@@ -58,7 +58,7 @@ class Search extends Component {
                         />
                     </Card.Section>
                     {
-                        this.props.loading ?
+                        this.props.isLoading ?
                             <Card.Section>
                                 <center><Spinner size="large" color="teal" /></center>
                             </Card.Section>

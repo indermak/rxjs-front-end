@@ -65,7 +65,7 @@ const reducer = (state = {}, action = {}) => {
     if (type === types.SEARCH) {
         return { ...state,
             ...rest,
-            loading: true,
+            isLoading: true,
             isError: false
         };
     }
@@ -73,14 +73,16 @@ const reducer = (state = {}, action = {}) => {
     if (type === types.SEARCH_DATA) {
         return { ...state,
             ...rest,
-            loading: false,
+            isLoading: false,
             isError: false
         };
     }
 
     if (type === types.LEAVE) {
         return { 
-            state : {}
+            ...state,
+            isLoading: false,
+            search: []
         };
     }
 

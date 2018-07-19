@@ -1,3 +1,3 @@
-const serverUrl = 'https://7afb9d85.ngrok.io/user';
+const serverUrl = 'https://63e799ec.ngrok.io/user';
 
 export { serverUrl };
